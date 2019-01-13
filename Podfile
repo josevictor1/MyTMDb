@@ -6,6 +6,10 @@ target 'MyTMDb' do
   use_frameworks!
 
   # Pods for MyTMDb
+  pod 'Moya', '~> 12.0'
+  pod 'RxSwift',    '~> 4.0'
+  pod 'RxCocoa',    '~> 4.0'
+  pod 'RxDataSources', '~> 3.0'
 
   target 'MyTMDbTests' do
     inherit! :search_paths
