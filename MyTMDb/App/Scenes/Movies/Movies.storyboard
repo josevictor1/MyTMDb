@@ -28,7 +28,7 @@
                                     <inset key="sectionInset" minX="25" minY="25" maxX="25" maxY="25"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="efE-1L-B79">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MoviesCell" id="efE-1L-B79" customClass="MoviesCell" customModule="MyTMDb" customModuleProvider="target">
                                         <rect key="frame" x="25" y="25" width="130" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">

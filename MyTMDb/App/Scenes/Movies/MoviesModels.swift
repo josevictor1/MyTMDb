@@ -11,5 +11,18 @@
 //  Type "usecase" for some magic!
 
 struct MoviesScene {
-    
+    struct Movies {
+        
+        struct Request {
+            
+        }
+        
+        struct Response {
+            
+        }
+        
+        struct ViewModel {
+            
+        }
+    }
 }
