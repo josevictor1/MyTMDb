@@ -10,15 +10,27 @@
 //
 //  Type "usecase" for some magic!
 
+import UIKit
+
 struct MoviesScene {
     struct Movies {
+        struct Request { }
+        
+        struct Response { }
+        
+        struct ViewModel {
+            let image: UIImage
+        }
+    }
+    
+    struct SelectedMovie {
         
         struct Request {
-            
+            let index: Int
         }
         
         struct Response {
-            
+           
         }
         
         struct ViewModel {

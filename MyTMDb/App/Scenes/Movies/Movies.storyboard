@@ -34,7 +34,21 @@
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="130" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RJ3-WL-Ubr">
+                                                    <rect key="frame" x="0.0" y="0.0" width="130" height="200"/>
+                                                </imageView>
+                                            </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="RJ3-WL-Ubr" firstAttribute="leading" secondItem="efE-1L-B79" secondAttribute="leading" id="ETV-7o-ASW"/>
+                                            <constraint firstItem="RJ3-WL-Ubr" firstAttribute="top" secondItem="efE-1L-B79" secondAttribute="top" id="awI-TJ-ked"/>
+                                            <constraint firstAttribute="trailing" secondItem="RJ3-WL-Ubr" secondAttribute="trailing" id="jw3-dd-79S"/>
+                                            <constraint firstAttribute="bottom" secondItem="RJ3-WL-Ubr" secondAttribute="bottom" id="tMd-Ia-2ny"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="RJ3-WL-Ubr" id="NhX-qd-htw"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>

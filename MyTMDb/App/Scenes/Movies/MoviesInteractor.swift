@@ -17,7 +17,7 @@ protocol MoviesInteractorOutput {
 }
 
 protocol MoviesDataSource {
-    
+    var selectedMovie: MoviesModel! { get }
 }
 
 protocol MoviesDataDestination {
@@ -27,8 +27,10 @@ protocol MoviesDataDestination {
 class MoviesInteractor: MoviesInteractorInput, MoviesDataSource, MoviesDataDestination {
     
     var output: MoviesInteractorOutput?
-    
+    var selectedMovie: MoviesModel!
     // MARK: Business logic
+    
+    
     
 
 }

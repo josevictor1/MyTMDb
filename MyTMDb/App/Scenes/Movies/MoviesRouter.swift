@@ -22,6 +22,10 @@ protocol MoviesRouterDataDestination: class {
     
 }
 
+protocol MoviewDataPassing {
+    var dataStore: MoviesDataSource { get  set }
+}
+
 class MoviesRouter: MoviesRouterInput {
     
     weak var viewController: MoviesViewController!

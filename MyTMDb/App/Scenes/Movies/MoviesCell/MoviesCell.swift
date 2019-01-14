@@ -10,14 +10,14 @@ import UIKit
 
 class MoviesCell: UICollectionViewCell {
     
-    var moviewName: String
+    var moviewName: String = ""
+    @IBOutlet weak var imageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-    
     }
     
-    private func fill(with model: MoviesScene.Movies.ViewModel) {
-        
+    func fill(with model: MoviesScene.Movies.ViewModel) {
+        imageView.image = model.image
     }
 }

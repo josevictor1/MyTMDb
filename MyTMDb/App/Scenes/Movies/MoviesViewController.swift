@@ -41,8 +41,16 @@ class MoviesViewController: UIViewController, MoviesViewControllerInput {
     
     // MARK: Display logic
     
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
+    
+//    private func bindCollectionView() {
+//        items
+//            .bind(to: collectionView.rx.items(cellIdentifier: "\(MoviesCell.self)", cellType: StocksChartCollectionCell.self)) { ( index, element, cell) in
+//                cell.chartDayLabel.text = element
+//                cell.setDidSelect(delegate: self, index: index, callback: { (_, index) in
+//                    self.subscribe(with: index)
+//                })
+//            }
+//            .disposed(by: disposeBag)
 //    }
 }
 
