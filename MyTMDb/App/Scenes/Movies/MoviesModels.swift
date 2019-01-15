@@ -14,27 +14,23 @@ import UIKit
 
 struct MoviesScene {
     struct Movies {
-        struct Request { }
-        
-        struct Response { }
-        
-        struct ViewModel {
-            let image: UIImage
-        }
-    }
-    
-    struct SelectedMovie {
-        
         struct Request {
-            let index: Int
         }
         
         struct Response {
-           
+            let movies: MoviesModel
         }
         
         struct ViewModel {
             
+            struct MovieInformation {
+                let posterImage: UIImage
+            }
+            
+            let movies: [MovieInformation]
         }
     }
+    
+    
+    
 }

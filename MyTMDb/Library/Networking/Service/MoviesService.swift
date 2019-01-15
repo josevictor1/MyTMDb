@@ -11,7 +11,6 @@ import Moya
 import RxSwift
 
 enum RequestError: Error {
-    
     case serverError
     case underlyingError(Error)
 }
@@ -29,11 +28,11 @@ extension RequestError: LocalizedError {
     }
 }
 
-struct MoviewService {
+struct MoviesService {
     
     let provider: MoyaProvider<MoviesAPI>
     
-    init(provider: MoyaProvider<MoviesAPI> = MoyaProvider()) {
+    init(provider: MoyaProvider<MoviesAPI> = MoyaProvider(plugins: [NetworkLoggerPlugin(verbose: true)])) {
         self.provider = provider
     }
     
@@ -45,7 +44,16 @@ struct MoviewService {
                     return Observable.empty().asSingle()
                 }
                 .map(MoviesModel.self)
-        
+    }
+    
+    func requestGenres() -> Single<GenreModel> {
+        return provider.rx.request(.requestGenre)
+            .filter(statusCode: 200)
+            .catchError { error in
+                try self.handleError(error)
+                return Observable.empty().asSingle()
+            }
+            .map(GenreModel.self)
     }
     
     private func handleError(_ error: Error) throws {

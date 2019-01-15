@@ -17,12 +17,16 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
+  - SVProgressHUD (2.2.5)
+  - UIGradient (1.2.0)
 
 DEPENDENCIES:
   - Moya/RxSwift
   - RxCocoa (~> 4.0)
   - RxDataSources (~> 3.0)
   - RxSwift (~> 4.0)
+  - SVProgressHUD
+  - UIGradient
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -34,6 +38,8 @@ SPEC REPOS:
     - RxCocoa
     - RxDataSources
     - RxSwift
+    - SVProgressHUD
+    - UIGradient
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
@@ -44,7 +50,9 @@ SPEC CHECKSUMS:
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  UIGradient: 48439bb1662c937b9a3d8b954712d0db5096372e
 
-PODFILE CHECKSUM: a9a65d03c45ef3a43e0b186c3f8807d0a4514b90
+PODFILE CHECKSUM: b2ce75eb0d8ca6a6d99820af3338e37a0621302b
 
 COCOAPODS: 1.5.3

@@ -17,7 +17,7 @@ struct AppEnvironment {
     
     static var baseImagesURL: String {
         //https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
-        return "https://image.tmdb.org"
+        return "https://image.tmdb.org/t/p/original/"
     }
     
     static var apiKey: String {

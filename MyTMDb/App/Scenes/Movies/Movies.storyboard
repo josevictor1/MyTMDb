@@ -66,10 +66,22 @@
                         <color key="badgeColor" red="1" green="0.53333333329999999" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="collectionView" destination="HsH-CU-585" id="Jsk-2I-FGq"/>
+                        <segue destination="XbQ-Sx-1zA" kind="showDetail" identifier="MovieDetails" id="xby-UR-SFk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gpJ-st-mSw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="57.971014492753625" y="155.35714285714286"/>
+        </scene>
+        <!--MovieDetails-->
+        <scene sceneID="HAy-h6-FhF">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MovieDetails" id="XbQ-Sx-1zA" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="acg-2k-poP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="812" y="155"/>
         </scene>
     </scenes>
     <resources>

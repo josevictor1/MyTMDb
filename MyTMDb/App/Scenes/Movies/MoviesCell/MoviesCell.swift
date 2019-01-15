@@ -17,7 +17,7 @@ class MoviesCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func fill(with model: MoviesScene.Movies.ViewModel) {
-        imageView.image = model.image
+    func fill(with model: MoviesScene.Movies.ViewModel.MovieInformation) {
+        imageView.image = model.posterImage
     }
 }
