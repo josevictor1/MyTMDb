@@ -9,19 +9,33 @@
 //  https://github.com/HelmMobile/clean-swift-templates
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxDataSources
+import SVProgressHUD
+
 
 protocol MoviesViewControllerInput {
-    
+    func display(with result: MoviesScene.Movies.ViewModel)
 }
 
 protocol MoviesViewControllerOutput {
-    
+    func requestMovies(with request: MoviesScene.Movies.Request)
+    func selectUser(with index: Int)
 }
 
 class MoviesViewController: UIViewController, MoviesViewControllerInput {
+
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var output: MoviesViewControllerOutput?
     var router: MoviesRouter?
+    var moviesList: [MovieInformation] = [] {
+        didSet {
+            bindCollectionView()
+        }
+    }
+    let disposeBag = DisposeBag()
     
     // MARK: Object lifecycle
     
@@ -34,16 +48,73 @@ class MoviesViewController: UIViewController, MoviesViewControllerInput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        requetMovies()
+        setBehavior()
     }
     
     // MARK: Requests
-    
+
+    func requetMovies() {
+        SVProgressHUD.show()
+        let request = MoviesScene.Movies.Request()
+        output?.requestMovies(with: request)
+    }
     
     // MARK: Display logic
     
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
-//    }
+    func display(with result: MoviesScene.Movies.ViewModel) {
+        moviesList += result.movies
+    }
+    
+    func display(with error: String) {
+        showAlert(withTitle: "Error", andText: "Faild request")
+    }
+    
+    private func bindCollectionView() {
+        configureCollection()
+        let movies = Observable<[MovieInformation]>.just(moviesList)
+        movies
+            .bind(to: collectionView.rx.items(cellIdentifier: "\(MoviesCell.self)", cellType: MoviesCell.self)) { ( index, element, cell) in
+                cell.fill(with: element)
+            }
+            .disposed(by: disposeBag)
+        SVProgressHUD.dismiss()
+    }
+    
+    private func setBehavior() {
+        configureCollection()
+        collectionView.rx.itemSelected.subscribe { event in
+            switch event {
+            case .next(let indexPath):
+                self.output?.selectUser(with: indexPath.row)
+                self.router?.navigateMovieDetail()
+            case .error:
+                break
+            case .completed:
+                break
+            }
+        }
+        .disposed(by: disposeBag)
+        collectionView.rx.willDisplayCell.subscribe { event in
+            switch event {
+            case .next(_, let at):
+                if self.moviesList.count - 1 == at.row {
+                    self.requetMovies()
+                }
+            case .error:
+                break
+            case .completed:
+                break
+            }
+        }
+        .disposed(by: disposeBag)
+    }
+    
+    private func configureCollection() {
+        collectionView.dataSource = nil
+        collectionView.delegate = nil
+    }
+    
 }
 
 //This should be on configurator but for some reason storyboard doesn't detect ViewController's name if placed there

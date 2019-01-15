@@ -9,17 +9,46 @@
 //  https://github.com/HelmMobile/clean-swift-templates
 
 protocol MovieDetailsPresenterInput {
-    
+    func presentMovie(with response: MovieDetailsScene.MovieDetail.Response)
+    func presentGenres(with response: MovieDetailsScene.Genres.Response)
 }
 
 protocol MovieDetailsPresenterOutput: class {
-    
+    func displayMovieDetails(viewModel: MovieDetailsScene.MovieDetail.ViewModel)
 }
 
 class MovieDetailsPresenter: MovieDetailsPresenterInput {
     
     weak var output: MovieDetailsPresenterOutput?
+    var genreList: GenreModel?
     
     // MARK: Presentation logic
+    func presentMovie(with response: MovieDetailsScene.MovieDetail.Response) {
+        output?.displayMovieDetails(viewModel: fillViewModel(with: response))
+    }
+    func presentGenres(with response: MovieDetailsScene.Genres.Response) {
+        genreList = response.genresList
+    }
     
+    private func fillViewModel(with response: MovieDetailsScene.MovieDetail.Response) -> MovieDetailsScene.MovieDetail.ViewModel {
+        let movieDetails = MovieDetailsScene.MovieDetail.ViewModel.MovieDetails(name: response.result.title ?? "",
+                                                                                genre: getGenres(with: response.result.genreIds ?? []),
+                                                                                overview: response.result.overview ?? "",
+                                                                                posterImage: ImageGetter.getImage(with: response.result.posterPath ?? ""),
+                                                                                backDropImage: ImageGetter.getImage(with: response.result.backdropPath ?? ""),
+                                                                                releaseDate: response.result.releaseDate ?? "")
+        return MovieDetailsScene.MovieDetail.ViewModel(movieDetails: movieDetails)
+    }
+    
+    private func getGenres(with list: [Int]) -> String {
+        guard let genres = genreList else { return "-" }
+        var foundGenres = ""
+        genres.genres?.forEach({ (genre) in
+            if let id = genre.id, let name = genre.name, list.contains(id) {
+                foundGenres = !foundGenres.isEmpty ? foundGenres + ", " + name : name
+            }
+        })
+        
+        return foundGenres
+    }
 }

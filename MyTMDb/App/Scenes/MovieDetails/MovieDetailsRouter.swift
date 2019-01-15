@@ -19,7 +19,7 @@ protocol MovieDetailsRouterDataSource: class {
 }
 
 protocol MovieDetailsRouterDataDestination: class {
-    
+    var movieDetails: Result? { get set }
 }
 
 class MovieDetailsRouter: MovieDetailsRouterInput {

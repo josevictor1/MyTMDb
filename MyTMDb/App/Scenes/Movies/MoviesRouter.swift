@@ -11,19 +11,20 @@
 import UIKit
 
 protocol MoviesRouterInput {
-    
+    func navigateMovieDetail()
 }
 
 protocol MoviesRouterDataSource: class {
-    
+    var selectedMovie: Result? { get }
 }
 
 protocol MoviesRouterDataDestination: class {
     
 }
 
+
 class MoviesRouter: MoviesRouterInput {
-    
+   
     weak var viewController: MoviesViewController!
     weak private var dataSource: MoviesRouterDataSource!
     weak var dataDestination: MoviesRouterDataDestination!
@@ -35,11 +36,16 @@ class MoviesRouter: MoviesRouterInput {
     }
     
     // MARK: Navigation
-    
+    func navigateMovieDetail() {
+        viewController.performSegue(withIdentifier: "MovieDetails", sender: viewController)
+    }
     // MARK: Communication
     
     func passDataToNextScene(for segue: UIStoryboardSegue) {
         // NOTE: Teach the router which scenes it can communicate with
         
+        if let movieDetailsViewController = segue.destination as? MovieDetailsViewController {
+            movieDetailsViewController.router?.dataDestination.movieDetails = dataSource.selectedMovie
+        }
     }
 }

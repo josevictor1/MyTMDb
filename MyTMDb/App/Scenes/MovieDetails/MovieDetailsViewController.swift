@@ -9,19 +9,33 @@
 //  https://github.com/HelmMobile/clean-swift-templates
 
 import UIKit
+import UIGradient
 
 protocol MovieDetailsViewControllerInput {
-    
+    func displayMovieDetails(viewModel: MovieDetailsScene.MovieDetail.ViewModel)
 }
 
 protocol MovieDetailsViewControllerOutput {
-    
+    func getMovie(with request: MovieDetailsScene.MovieDetail.Request)
 }
 
 class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerInput {
     
+    @IBOutlet weak var backDropImage: UIImageView!
+    @IBOutlet weak var posterImage: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var gradientView: UIView!
+    
     var output: MovieDetailsViewControllerOutput?
     var router: MovieDetailsRouter?
+    
+    private var bottomGradientViewColor: UIColor? {
+        let acessoryGradientViewFrameExpand: CGRect = gradientView.frame
+        return UIColor.fromGradientWithDirection(.topToBottom, frame: acessoryGradientViewFrameExpand, colors: [.clear, gradientView.backgroundColor!])
+    }
     
     // MARK: Object lifecycle
     
@@ -34,21 +48,48 @@ class MovieDetailsViewController: UIViewController, MovieDetailsViewControllerIn
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        requestDetails()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupGradientViewStyle()
     }
     
     // MARK: Requests
-    
+    func requestDetails() {
+        output?.getMovie(with: MovieDetailsScene.MovieDetail.Request())
+    }
     
     // MARK: Display logic
     
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
-//    }
+    func displayMovieDetails(viewModel: MovieDetailsScene.MovieDetail.ViewModel) {
+        backDropImage.image = viewModel.movieDetails.backDropImage
+        posterImage.image = viewModel.movieDetails.posterImage
+        titleLabel.text = viewModel.movieDetails.name
+        genreLabel.text = viewModel.movieDetails.genre
+        releaseDateLabel.text = viewModel.movieDetails.releaseDate
+        overviewLabel.text = viewModel.movieDetails.overview
+    }
+    
+    //MARK: Style
+    
+    private func setupGradientViewStyle() {
+        gradientView.backgroundColor = bottomGradientViewColor
+    }
 }
 
 //This should be on configurator but for some reason storyboard doesn't detect ViewController's name if placed there
 extension MovieDetailsViewController: MovieDetailsPresenterOutput {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         router?.passDataToNextScene(for: segue)
+    }
+}
+
+// MARK: - Actions
+extension MovieDetailsViewController {
+    @IBAction func backButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }
